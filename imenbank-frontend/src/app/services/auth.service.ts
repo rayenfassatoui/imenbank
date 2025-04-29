@@ -63,11 +63,11 @@ export class AuthService {
   }
 
   private handleAuthResponse(response: AuthResponse): void {
-    localStorage.setItem(this.tokenKey, response.token);
+    localStorage.setItem(this.tokenKey, response.accessToken);
     localStorage.setItem(this.refreshTokenKey, response.refreshToken);
     
     // Extract user information from token
-    const decodedToken = this.jwtHelper.decodeToken(response.token);
+    const decodedToken = this.jwtHelper.decodeToken(response.accessToken);
     const user: User = {
       id: decodedToken.id,
       username: decodedToken.sub,

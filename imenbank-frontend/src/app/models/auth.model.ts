@@ -8,14 +8,12 @@ export interface RegisterRequest {
   password: string;
   firstName: string;
   lastName: string;
+  role: string;
 }
 
 export interface AuthResponse {
-  token: string;
+  accessToken: string;
   refreshToken: string;
-  username: string;
-  roles: string[];
-  expiresIn: number;
 }
 
 export interface User {

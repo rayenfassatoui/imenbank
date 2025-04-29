@@ -79,6 +79,23 @@ import { RegisterRequest } from '../../models/auth.model';
               </div>
             </div>
             
+            <div class="mb-3">
+              <label for="role" class="form-label">Role</label>
+              <select 
+                class="form-select" 
+                id="role" 
+                formControlName="role"
+                [ngClass]="{'is-invalid': submitted && f['role'].errors}"
+              >
+                <option value="">Select Role</option>
+                <option value="USER">Standard User</option>
+                <option value="ADMIN">Administrator</option>
+              </select>
+              <div *ngIf="submitted && f['role'].errors" class="invalid-feedback">
+                <div *ngIf="f['role'].errors['required']">Role is required</div>
+              </div>
+            </div>
+            
             <div class="d-grid gap-2">
               <button type="submit" class="btn btn-primary" [disabled]="loading">
                 <span *ngIf="loading" class="spinner-border spinner-border-sm me-1"></span>
@@ -137,7 +154,8 @@ export class RegisterComponent implements OnInit {
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       username: ['', [Validators.required, Validators.minLength(3)]],
-      password: ['', [Validators.required, Validators.minLength(6)]]
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      role: ['', Validators.required]
     });
   }
 
@@ -159,7 +177,8 @@ export class RegisterComponent implements OnInit {
       firstName: this.f['firstName'].value,
       lastName: this.f['lastName'].value,
       username: this.f['username'].value,
-      password: this.f['password'].value
+      password: this.f['password'].value,
+      role: this.f['role'].value
     };
     
     this.authService.register(registerRequest)
